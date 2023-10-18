@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e2531a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #login-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="typeEmailX" placeholder="Email">
+        <input type="password" id="typePasswordX" placeholder="Password">
+        <button id="loginButton">Login</button>
+        <button class="sign-up-link">Sign Up</button>
+    </div>
+
+    <script>
+      class User {
+    constructor(email, password) {
+      this.email = email;
+      this.password = password;
+    }
+
+    login() {
+      // Simulate a login process
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (
+            this.email === "mufaro@melsoft.com" &&
+            this.password === "javascript"
+          ) {
+            resolve();
+          } else {
+            reject("Invalid credentials");
+          }
+        }, 2000); // Simulate a 2-second delay
+      });
+    }
+  }
+
+  class Registration {
+    constructor(email, password) {
+      this.email = email;
+      this.password = password;
+    }
+
+    register() {
+      // Simulate a registration process
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Check if the email is unique (you can add more checks here)
+          if (this.email !== "existing@example.com") {
+            resolve();
+          } else {
+            reject("Email already exists");
+          }
+        }, 2000); // Simulate a 2-second delay
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginButton = document.querySelector("#loginButton");
+    const signUpLink = document.querySelector(".sign-up-link");
+    const emailInput = document.querySelector("#typeEmailX");
+    const passwordInput = document.querySelector("#typePasswordX");
+
+    loginButton.addEventListener("click", function () {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const user = new User(email, password);
+
+      // Display "Logging in..." message
+      loginButton.innerHTML = "Logging in...";
+      loginButton.disabled = true;
+
+      user
+        .login()
+        .then(() => {
+          // Redirect to index.html after successful login
+          window.location.href="index.html";
+        })
+        .catch((error) => {
+          // Display an error message
+          alert(error);
+        })
+        .finally(() => {
+          // Restore the login button text and enable it
+          loginButton.innerHTML = "Login";
+          loginButton.disabled = false;
+        });
+    });
+
+    signUpLink.addEventListener("click", function () {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      const registration = new Registration(email, password);
+
+      // Display "Signing up..." message
+      signUpLink.innerHTML = "Signing up...";
+      signUpLink.disabled = true;
+
+      registration
+        .register()
+        .then(() => {
+          alert("Registration successful. Please log in.");
+          // You can optionally redirect to the login page here
+        })
+        .catch((error) => {
+          alert(error);
+        })
+        .finally(() => {
+          // Restore the sign-up button text and enable it
+          signUpLink.innerHTML = "Sign Up";
+          signUpLink.disabled = false;
+        });
+    });
+  });
+    </script>
+</body>
+</html>
+
