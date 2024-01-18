@@ -61,6 +61,8 @@ We prioritize the aesthetic appeal and user-friendliness of the User Interface (
 
 ## 9. JavaScript Best Practices
 
+# Netlify link : https://ticketstation2.netlify.app
+
 The project adheres to JavaScript best practices, including ES6 principles. We maintain code quality and readability to ensure a smooth development and maintenance process.
 
 
